@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: task-manager-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - task-manager-network
+
+  server:
+    build: ./server
+    container_name: task-manager-server
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      MONGODB_URI: mongodb://admin:password@mongodb:27017/SEIASIA?authSource=admin
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+    depends_on:
+      - mongodb
+    networks:
+      - task-manager-network
+
+  client:
+    build: ./client
+    container_name: task-manager-client
+    restart: unless-stopped
+    ports:
+      - "5173:80"
+    depends_on:
+      - server
+    networks:
+      - task-manager-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  task-manager-network:
+    driver: bridge
