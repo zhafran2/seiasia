@@ -1,8 +1,8 @@
-import { getDb } from "../config/db";
-import { hashPassword, comparePass } from "../helpers/bcrypt.js";
-import { signToken } from "../helpers/jwt.js";
+const { getDb } = require("../config/db");
+const { hashPassword, comparePass } = require("../helpers/bcrypt");
+const { signToken } = require("../helpers/jwt");
 
-export default class User {
+class User {
     static async getCollection() {
         const db = await getDb();
         const collection = db.collection('users');
@@ -125,3 +125,5 @@ export default class User {
         }
     }
 }
+
+module.exports = User;

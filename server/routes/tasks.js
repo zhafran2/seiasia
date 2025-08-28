@@ -1,7 +1,7 @@
-import express from 'express';
-import Task from '../models/task.js';
-import { authenticate } from '../middleware/auth.js';
-import { validateTask } from '../middleware/validation.js';
+const express = require('express');
+const Task = require('../models/task');
+const { authenticate } = require('../middleware/auth');
+const { validateTask } = require('../middleware/validation');
 
 const router = express.Router();
 
@@ -23,4 +23,4 @@ router.put('/:id', validateTask, Task.update);
 // DELETE /tasks/:id - Delete a task
 router.delete('/:id', Task.delete);
 
-export default router;
+module.exports = router;

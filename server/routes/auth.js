@@ -1,6 +1,6 @@
-import express from 'express';
-import User from '../models/user.js';
-import { validateUserRegistration, validateUserLogin } from '../middleware/validation.js';
+const express = require('express');
+const User = require('../models/user');
+const { validateUserRegistration, validateUserLogin } = require('../middleware/validation');
 
 const router = express.Router();
 
@@ -10,4 +10,4 @@ router.post('/register', validateUserRegistration, User.register);
 // POST /auth/login
 router.post('/login', validateUserLogin, User.login);
 
-export default router;
+module.exports = router;
