@@ -1,7 +1,7 @@
-import { getDb } from "../config/db";
-import { ObjectId } from "mongodb";
+const { getDb } = require("../config/db");
+const { ObjectId } = require("mongodb");
 
-export default class Task {
+class Task {
     static async getCollection() {
         const db = await getDb();
         const collection = db.collection('tasks');
@@ -186,3 +186,5 @@ export default class Task {
         }
     }
 }
+
+module.exports = Task;

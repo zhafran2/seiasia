@@ -1,4 +1,4 @@
-export const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
     console.error('Error:', err);
 
     // MongoDB duplicate key error
@@ -55,9 +55,11 @@ export const errorHandler = (err, req, res, next) => {
     });
 };
 
-export const notFound = (req, res, next) => {
+const notFound = (req, res, next) => {
     res.status(404).json({
         success: false,
         message: `Route ${req.originalUrl} not found`
     });
 };
+
+module.exports = { errorHandler, notFound };

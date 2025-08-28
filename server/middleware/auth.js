@@ -1,7 +1,7 @@
-import { verifyToken } from '../helpers/jwt.js';
-import User from '../models/user.js';
+const { verifyToken } = require('../helpers/jwt');
+const User = require('../models/user');
 
-export const authenticate = async (req, res, next) => {
+const authenticate = async (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
         
@@ -42,7 +42,7 @@ export const authenticate = async (req, res, next) => {
     }
 };
 
-export const authorize = (roles = []) => {
+const authorize = (roles = []) => {
     return (req, res, next) => {
         if (!req.user) {
             return res.status(401).json({
@@ -61,3 +61,5 @@ export const authorize = (roles = []) => {
         next();
     };
 };
+
+module.exports = { authenticate, authorize };

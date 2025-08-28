@@ -1,4 +1,4 @@
-export const validateUserRegistration = (req, res, next) => {
+const validateUserRegistration = (req, res, next) => {
     const { username, email, password } = req.body;
 
     const errors = [];
@@ -26,7 +26,7 @@ export const validateUserRegistration = (req, res, next) => {
     next();
 };
 
-export const validateUserLogin = (req, res, next) => {
+const validateUserLogin = (req, res, next) => {
     const { email, password } = req.body;
 
     const errors = [];
@@ -50,7 +50,7 @@ export const validateUserLogin = (req, res, next) => {
     next();
 };
 
-export const validateTask = (req, res, next) => {
+const validateTask = (req, res, next) => {
     const { title, description, status, due_date } = req.body;
 
     const errors = [];
@@ -88,3 +88,5 @@ export const validateTask = (req, res, next) => {
 
     next();
 };
+
+module.exports = { validateUserRegistration, validateUserLogin, validateTask };

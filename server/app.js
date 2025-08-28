@@ -1,10 +1,10 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import { requestLogger } from './middleware/logger.js';
-import { errorHandler, notFound } from './middleware/errorHandler.js';
-import authRoutes from './routes/auth.js';
-import taskRoutes from './routes/tasks.js';
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const { requestLogger } = require('./middleware/logger');
+const { errorHandler, notFound } = require('./middleware/errorHandler');
+const authRoutes = require('./routes/auth');
+const taskRoutes = require('./routes/tasks');
 
 // Load environment variables
 dotenv.config();
@@ -43,4 +43,4 @@ app.listen(PORT, () => {
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
 });
 
-export default app;
+module.exports = app;

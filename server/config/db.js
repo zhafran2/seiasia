@@ -1,6 +1,6 @@
-import { MongoClient } from 'mongodb';
+const { MongoClient } = require('mongodb');
 
-const uri = process.env.MONGODB_URI;
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/seiasia';
 const client = new MongoClient(uri);
 
 let db = null;
@@ -16,16 +16,12 @@ async function connect() {
     }
 }
 
-export async function getDb() {
+async function getDb() {
     if (!db) {
         await connect();
     }
     return db;
 }
 
-export async function closeConnection() {
-    if (client) {
-        await client.close();
-        console.log('MongoDB connection closed');
-    }
-}
+module.exports = { getDb };
+

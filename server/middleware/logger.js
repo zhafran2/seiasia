@@ -1,4 +1,4 @@
-export const requestLogger = (req, res, next) => {
+const requestLogger = (req, res, next) => {
     const start = Date.now();
     
     res.on('finish', () => {
@@ -14,3 +14,5 @@ export const requestLogger = (req, res, next) => {
     
     next();
 };
+
+module.exports = { requestLogger };
